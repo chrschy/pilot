@@ -186,7 +186,10 @@ class TUTSoundEvents(Dataset):
     def __getitem__(self, index: int) -> Tuple[ndarray, Tuple[ndarray, ndarray]]:
         sequence = self.chunks[index]
 
-        audio_features = self._get_audio_features(sequence['audio_file'], sequence['start_time'], sequence['end_time'])
+        audio_features = self._get_audio_features(sequence['audio_file'],
+                                                  sequence['start_time'],
+                                                  sequence['end_time'])
+
         source_activity, direction_of_arrival = self._get_annotation(sequence['annotation_file'],
                                                                      sequence['start_time'],
                                                                      sequence['end_time'])
