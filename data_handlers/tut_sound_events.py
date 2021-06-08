@@ -131,7 +131,7 @@ class TUTSoundEvents(Dataset):
 
         audio_features = np.concatenate((np.abs(spectrogram), np.angle(spectrogram)), axis=0)
 
-        return audio_features
+        return audio_features.astype(np.float32)
 
     def _get_annotation(self,
                         annotation_file: str,
@@ -159,8 +159,8 @@ class TUTSoundEvents(Dataset):
 
         num_frames_per_chunk = int(2 * chunk_length / self.frame_length)
 
-        source_activity = np.zeros((num_frames_per_chunk, self.num_sources_output), dtype=np.uint8)
-        direction_of_arrival = np.zeros((num_frames_per_chunk, self.num_sources_output, 2), dtype=np.float32)
+        source_activity = np.zeros((self.num_sources_output, num_frames_per_chunk), dtype=np.uint8)
+        direction_of_arrival = np.zeros((self.num_sources_output, num_frames_per_chunk, 2), dtype=np.float32)
 
         for frame_idx in range(num_frames_per_chunk):
             frame_start_time = start_time + frame_idx * (self.frame_length / 2)
@@ -174,11 +174,11 @@ class TUTSoundEvents(Dataset):
             num_active_sources = len(events_in_chunk)
 
             if num_active_sources > 0:
-                source_activity[frame_idx, :num_active_sources] = 1
-                direction_of_arrival[frame_idx, :num_active_sources, :] = np.deg2rad(
+                source_activity[:num_active_sources, frame_idx] = 1
+                direction_of_arrival[:num_active_sources, frame_idx, :] = np.deg2rad(
                     events_in_chunk[['azimuth', 'elevation']].to_numpy())
 
-        return source_activity, direction_of_arrival
+        return source_activity.astype(np.float32), direction_of_arrival.astype(np.float32)
 
     def __len__(self) -> int:
         return len(self.chunks)
