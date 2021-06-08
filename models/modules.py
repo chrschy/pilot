@@ -16,6 +16,7 @@ class FeatureExtraction(nn.Module):
                  dropout_rate: float = 0.0) -> None:
         """Feature extraction stage, as described in Sec. 3.1 of the paper. The utilized convolutional neural network
         structure is based on the framework presented in [1].
+
         Args:
             chunk_length (float): Signal chunk (processing block) length in seconds.
             frame_length (float): Frame length within chunks in seconds.
@@ -68,6 +69,7 @@ class FeatureExtraction(nn.Module):
 
     def forward(self, audio_features: Tensor) -> Tuple[Tensor, Tensor]:
         """Feature extraction forward pass.
+
         Args:
             audio_features (Tensor): Audio feature tensor (input spectrogram representation).
 
@@ -103,6 +105,7 @@ class LinearGaussianSystem(nn.Module):
                  prior_mean: Tensor = None,
                  prior_covariance: Tensor = None) -> None:
         """Linear Gaussian system, as described in Sec. 3.3 in the paper.
+
         Args:
             state_dim (int): State dimension.
             observation_dim (int): Observation dimension.
@@ -133,6 +136,7 @@ class LinearGaussianSystem(nn.Module):
                 prior_mean: Tensor = None,
                 prior_covariance: Tensor = None) -> Tuple[Tensor, Tensor]:
         """Linear Gaussian system forward pass.
+
         Args:
             observation (Tensor): Observation vector.
             observation_noise (Tensor): Estimated (or fixed) observation noise covariance matrix (per time-step).

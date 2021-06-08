@@ -19,6 +19,7 @@ class PILOT(nn.Module):
                  transformer_dropout: float = 0.1,
                  num_sources_output: int = 3) -> None:
         """The Probabilistic Localization of Sounds with Transformers (PILOT) framework main class.
+
         Args:
             chunk_length (float): Signal chunk (processing block) length in seconds.
             frame_length (float): Frame length within chunks in seconds.
@@ -59,6 +60,7 @@ class PILOT(nn.Module):
 
     def forward(self, audio_features: Tensor) -> Tuple[Tensor, Tensor, Tensor]:
         """PILOT forward pass.
+
         Args:
             audio_features: Audio feature tensor (input spectrogram representation).
 

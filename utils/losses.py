@@ -12,6 +12,7 @@ class ProbabilisticSELLoss(_Loss):
                  alpha: float = 1.0, 
                  beta: float = 1.0) -> None:
         """Returns the probabilistic sound event localization loss, as described in Eq. (5) in the paper.
+
         Args:
             alpha (float): DoA loss weighting factor.
             beta (float): KLD loss weighting factor.
@@ -24,6 +25,7 @@ class ProbabilisticSELLoss(_Loss):
     @staticmethod
     def compute_spherical_distance(y_pred: Tensor, y_true: Tensor) -> Tensor:
         """Computes the distance between two points (given as angles) on a sphere, as described in Eq. (6) in the paper.
+
         Args:
             y_pred (Tensor): Tensor of predicted azimuth and elevation angles.
             y_true (Tensor): Tensor of ground-truth azimuth and elevation angles.
@@ -43,6 +45,7 @@ class ProbabilisticSELLoss(_Loss):
     def compute_kld_to_standard_norm(covariance_matrix: Tensor) -> Tensor:
         """Computes the Kullback-Leibler divergence between two multivariate Gaussian distributions with identical mean,
         where the second distribution has an identity covariance matrix.
+
         Args:
             covariance_matrix (Tensor): Covariance matrix of the first distribution.
 
@@ -57,6 +60,7 @@ class ProbabilisticSELLoss(_Loss):
 
     def forward(self, predictions: Tuple[Tensor, Tensor, Tensor], targets: Tuple[Tensor, Tensor]) -> Tensor:
         """Loss computation function.
+
         Args:
             predictions (tuple): Predicted source activity, direction-of-arrival and posterior covariance matrix.
             targets (Tensor): Ground-truth source activity and direction-of-arrival.
