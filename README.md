@@ -8,8 +8,17 @@ This repository contains the codebase accompanying our publication:
 
 ## 📓 Summary
 
-Sound event localization aims at estimating the positions of sound sources in the environment with respect to an acoustic receiver (e.g. a microphone array). Recent advances in this domain most prominently focused on utilizing deep recurrent neural networks. Inspired by the success of transformer architectures as a suitable alternative to classical recurrent neural networks, the PILOT (*P*robab*i*listic *L*ocalization of S*o*unds with *T*ransformers) model is a transformer-based sound event localization framework, where temporal dependencies in the received multi-channel audio signals are captured via self-attention mechanisms. Additionally, the estimated sound event positions are represented as multivariate Gaussian variables, yielding an additional notion of uncertainty, which many previously proposed deep learning-based systems designed for this application do not provide.
+Sound event localization aims at estimating the positions of sound sources in the environment with respect to an acoustic receiver (e.g. a microphone array). Recent advances in this domain most prominently focused on utilizing deep recurrent neural networks. Inspired by the success of transformer architectures as a suitable alternative to classical recurrent neural networks, the PILOT (*P*robab*i*listic *L*ocalization of S*o*unds with *T*ransformers) model is a transformer-based sound event localization framework, where temporal dependencies in the received multi-channel audio signals are captured via self-attention mechanisms. Additionally, the estimated sound event positions are represented as multivariate Gaussian variables, yielding an additional notion of uncertainty, which many previously proposed deep learning-based systems designed for this application do not provide. The general architecture of PILOT is shown in the figure below.
+
+<div align="center">
+   <img src="./images/overview.png" width="800" title="PILOT architecture">
+<p>Overview of the general PILOT architecture.</p>
+</div>
 
 ## 🚀 Getting started
 
-You can train and evaluate the PILOT model using the [ANSIM](https://doi.org/10.5281/zenodo.1237703), [RESIM](https://doi.org/10.5281/zenodo.1237707) and [REAL](https://doi.org/10.5281/zenodo.1237793) sound event localization and detection datasets. We have prepared an 
+You can train and evaluate the PILOT model using the [ANSIM](https://doi.org/10.5281/zenodo.1237703), [RESIM](https://doi.org/10.5281/zenodo.1237707) and [REAL](https://doi.org/10.5281/zenodo.1237793) sound event localization and detection datasets. We have prepared a script that downloads the respective datasets and stores them in a suitable folder structure. Simply run 
+
+`$ ./download_data.sh dataset-name`
+
+where `dataset-name` specifies the desired dataset (either `ansim`, `resim` or `real`).
