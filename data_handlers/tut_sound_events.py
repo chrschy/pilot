@@ -5,7 +5,7 @@ import pandas as pd
 from scipy.signal import stft
 import soundfile as sf
 from torch.utils.data import Dataset
-from typing import Tuple
+from typing import Any, Optional, Tuple
 
 
 class TUTSoundEvents(Dataset):
@@ -30,6 +30,12 @@ class TUTSoundEvents(Dataset):
             num_fft_bins (int): Number of frequency bins used in the fast Fourier transform (FFT).
             num_sources_output (int): Number of sources represented in the targets.
         """
+        if isinstance(split, int):
+            split = tuple([split])
+
+        if isinstance(num_overlapping_sources, int):
+            split = tuple([num_overlapping_sources])
+
         self.split = split
         self.num_overlapping_sources = num_overlapping_sources
         self.frame_length = frame_length
